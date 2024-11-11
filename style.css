@@ -45,6 +45,22 @@ h1 {
     font-family: 'Arial', sans-serif;
 }
 
+.play-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #FF69B4;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #ff4c99;
+}
+
 .scroll-box {
     width: 90%;
     max-width: 600px;
