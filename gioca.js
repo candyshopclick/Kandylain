@@ -46,31 +46,36 @@ candy.addEventListener('click', () => {
         document.body.removeChild(plusFive);
     };
 
-    // Genera una nuova caramella
-    generateCandy();
+    // Genera una nuova caramella dopo aver cliccato
+    setTimeout(generateCandy, 1000);  // Nuova caramella dopo 1 secondo
 });
 
-// Timer del gioco
-let timer = 15;
-let timerInterval = setInterval(() => {
-    if (timer <= 0) {
-        clearInterval(timerInterval);
-        showFinalScore();
-    } else {
-        timer--;
-    }
-}, 1000);
-
-// Mostra il punteggio finale
+// Funzione per mostrare il punteggio finale
 function showFinalScore() {
     finalScore.textContent = score;
     scoreBoard.style.display = 'block';
 }
 
-// Chiudi il pannello del punteggio finale
+// Funzione per chiudere il pannello del punteggio
 closeBtn.addEventListener('click', () => {
     scoreBoard.style.display = 'none';
 });
 
-// Avvia il gioco con la prima caramella
+// Avvia il gioco generando la prima caramella
 generateCandy();
+
+// Timer per il gioco
+let timer = 15;
+let timerDisplay = document.createElement('div');
+timerDisplay.textContent = `Tempo rimasto: ${timer}s`;
+document.body.appendChild(timerDisplay);
+
+let countdown = setInterval(() => {
+    timer--;
+    timerDisplay.textContent = `Tempo rimasto: ${timer}s`;
+
+    if (timer <= 0) {
+        clearInterval(countdown);
+        showFinalScore();  // Mostra il punteggio finale al termine del timer
+    }
+}, 1000);
