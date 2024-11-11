@@ -1,163 +1,70 @@
-* {
-    box-sizing: border-box;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffe6f2;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffe6f2;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    padding: 10px;
-}
-
 main {
     text-align: center;
-    width: 90%;
-    max-width: 600px;
 }
 
-header h1 {
-    font-size: 8vw; /* Usa vw per dimensione adattiva */
-    color: #ff66b2;
-    margin-bottom: 20px;
-    animation: fadeInTitle 1s ease-in-out forwards;
-    opacity: 0;
-}
-
-@keyframes fadeInTitle {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.scrollable-list {
-    background-color: #fff;
+header {
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-    width: 100%; /* Adattivo alla larghezza del contenitore */
 }
 
-.scrollable-list p {
-    font-weight: bold;
+h1 {
+    font-size: 3rem;
     color: #ff66b2;
     margin-bottom: 10px;
 }
 
+p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.scrollable-list {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: scroll;
+    background-color: #fff;
+    border: 2px solid #ff66b2;
+    border-radius: 10px;
+}
+
 .scrollable-list ul {
     list-style-type: none;
+    padding: 0;
 }
 
-.scrollable-list ul li {
-    font-size: 1.1rem;
-    color: #333;
-    padding: 5px 0;
-    opacity: 0;
-    animation: fadeIn 0.5s ease forwards;
-    animation-delay: calc(var(--i) * 0.07s);
+.scrollable-list li {
+    margin: 5px 0;
+    font-size: 1.2rem;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.suggestion-form {
-    margin-top: 20px;
-}
-
-.suggestion-form h2 {
-    color: #ff66b2;
-    font-size: 1.5rem;
-}
-
-.suggestion-form input, .suggestion-form button {
+.gioca-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     padding: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ff66b2;
-    margin-top: 10px;
-}
-
-.suggestion-form input {
-    width: 65%;
-    margin-right: 5px;
-}
-
-.suggestion-form button {
     background-color: #ff66b2;
-    color: #fff;
+    border: none;
+    color: white;
+    font-size: 1rem;
     cursor: pointer;
-    width: 30%;
+    border-radius: 5px;
 }
 
-.suggestion-form button:hover {
+.gioca-btn:hover {
     background-color: #ff4da6;
 }
 
 footer {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    font-size: 0.8rem;
+    margin-top: 20px;
+    font-size: 1rem;
     color: #666;
 }
 
-/* Media Queries per adattabilità */
-
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 10vw; /* Riduci la dimensione del titolo per schermi più piccoli */
-    }
-
-    .scrollable-list {
-        max-height: 250px; /* Riduci l'altezza massima per adattarsi meglio agli schermi piccoli */
-    }
-
-    .suggestion-form h2 {
-        font-size: 1.3rem; /* Font più piccolo per schermi più stretti */
-    }
-
-    .suggestion-form input {
-        width: 60%;
-    }
-
-    .suggestion-form button {
-        width: 35%;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 12vw; /* Ancora più piccolo su schermi molto stretti */
-    }
-
-    .scrollable-list {
-        max-height: 200px; /* Adatta ancora l'altezza per schermi piccoli */
-    }
-
-    .suggestion-form input, .suggestion-form button {
-        width: 100%; /* Disposizione verticale dei campi */
-        margin: 5px 0;
-    }
-}
