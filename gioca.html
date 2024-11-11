@@ -8,12 +8,16 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Catch the Candy!</h1>
-        <p>Clicca sulla caramella!</p>
+        <h1>Acchiappa la Caramella!</h1>
+        <p>Clicca sulla caramella per ottenere punti!</p>
+        <div class="score-container">
+            <span>Punti: <span id="score">0</span></span>
+        </div>
         <div class="game-area" id="game-area">
             <!-- Le caramelle verranno generate qui -->
         </div>
         <button id="reset-btn">Gioca di nuovo</button>
+        <button id="back-btn">Torna indietro</button>
     </div>
 
     <script src="gioca.js"></script>
