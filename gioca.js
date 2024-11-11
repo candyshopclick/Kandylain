@@ -6,6 +6,7 @@ let scoreDisplay = document.getElementById('score');
 let timerDisplay = document.getElementById('time-left');
 let finalScoreDisplay = document.getElementById('final-score');
 let scoreBoard = document.getElementById('score-board');
+let candyGenerated = false; // Variabile per tenere traccia se una caramella è stata generata
 
 function startGame() {
     interval = setInterval(updateTimer, 1000);
@@ -22,24 +23,28 @@ function updateTimer() {
 }
 
 function spawnCandy() {
-    let candy = document.createElement('span');
-    candy.classList.add('candy');
-    candy.textContent = '🍬';
-    candyBox.appendChild(candy);
+    if (!candyGenerated) { // Verifica se una caramella è già stata generata
+        let candy = document.createElement('span');
+        candy.classList.add('candy');
+        candy.textContent = '🍬';
+        candyBox.appendChild(candy);
 
-    let randomPositionX = Math.floor(Math.random() * (candyBox.offsetWidth - 50));
-    let randomPositionY = Math.floor(Math.random() * (candyBox.offsetHeight - 50));
+        let randomPositionX = Math.floor(Math.random() * (candyBox.offsetWidth - 50));
+        let randomPositionY = Math.floor(Math.random() * (candyBox.offsetHeight - 50));
 
-    candy.style.left = randomPositionX + 'px';
-    candy.style.top = randomPositionY + 'px';
+        candy.style.left = randomPositionX + 'px';
+        candy.style.top = randomPositionY + 'px';
 
-    candy.addEventListener('click', function () {
-        addScore();
-        showScoreAnimation();
-        candy.remove();
-    });
+        candy.addEventListener('click', function () {
+            addScore();
+            showScoreAnimation();
+            candy.remove();
+            candyGenerated = false; // Dopo il click, permette di generare una nuova caramella
+            spawnCandy(); // Rigenera una caramella
+        });
 
-    setTimeout(spawnCandy, 1000); // Spawna un altro candy dopo 1 secondo
+        candyGenerated = true; // Imposta che una caramella è stata generata
+    }
 }
 
 function addScore() {
