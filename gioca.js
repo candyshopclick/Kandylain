@@ -6,7 +6,8 @@ let scoreDisplay = document.getElementById('score');
 let timerDisplay = document.getElementById('time-left');
 let finalScoreDisplay = document.getElementById('final-score');
 let scoreBoard = document.getElementById('score-board');
-let candyGenerated = false; // Variabile per tenere traccia se una caramella è stata generata
+let candyGenerated = false;
+let closeBtn = document.getElementById('close-btn');
 
 function startGame() {
     interval = setInterval(updateTimer, 1000);
@@ -23,7 +24,7 @@ function updateTimer() {
 }
 
 function spawnCandy() {
-    if (!candyGenerated) { // Verifica se una caramella è già stata generata
+    if (!candyGenerated) {
         let candy = document.createElement('span');
         candy.classList.add('candy');
         candy.textContent = '🍬';
@@ -37,13 +38,13 @@ function spawnCandy() {
 
         candy.addEventListener('click', function () {
             addScore();
-            showScoreAnimation();
+            showScoreAnimation(candy);  // Mostra +5 sopra la caramella
             candy.remove();
-            candyGenerated = false; // Dopo il click, permette di generare una nuova caramella
-            spawnCandy(); // Rigenera una caramella
+            candyGenerated = false; // Permette di generare una nuova caramella
+            spawnCandy();
         });
 
-        candyGenerated = true; // Imposta che una caramella è stata generata
+        candyGenerated = true; // Impedisce che vengano generate più caramelle
     }
 }
 
@@ -52,16 +53,15 @@ function addScore() {
     scoreDisplay.textContent = 'Punteggio: ' + score;
 }
 
-function showScoreAnimation() {
+function showScoreAnimation(candy) {
     let scoreAnimation = document.createElement('div');
     scoreAnimation.classList.add('score-animation');
     scoreAnimation.textContent = '+5';
     document.body.appendChild(scoreAnimation);
 
     scoreAnimation.style.position = 'absolute';
-    scoreAnimation.style.top = '20px';
-    scoreAnimation.style.left = '50%';
-    scoreAnimation.style.transform = 'translateX(-50%)';
+    scoreAnimation.style.left = (candy.offsetLeft + candy.offsetWidth / 2 - 15) + 'px'; // Posiziona sopra la caramella
+    scoreAnimation.style.top = (candy.offsetTop - 20) + 'px';
     scoreAnimation.style.fontSize = '24px';
     scoreAnimation.style.color = '#FF69B4';
     scoreAnimation.style.animation = 'fadeOut 1s forwards';
@@ -75,5 +75,9 @@ function showFinalScore() {
     finalScoreDisplay.textContent = 'Punteggio finale: ' + score;
     scoreBoard.style.display = 'block';
 }
+
+closeBtn.addEventListener('click', function() {
+    scoreBoard.style.display = 'none';
+});
 
 startGame();
