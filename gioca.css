@@ -66,7 +66,7 @@ h1 {
     }
 }
 
-.start-button, .replay-btn {
+.start-button, .replay-btn, #start-new-game {
     margin-top: 20px;
     padding: 10px 20px;
     background-color: #ff3366; /* Rosa caramella */
@@ -77,7 +77,7 @@ h1 {
     cursor: pointer;
 }
 
-.start-button:hover, .replay-btn:hover {
+.start-button:hover, .replay-btn:hover, #start-new-game:hover {
     background-color: #ff4d7f;
 }
 
