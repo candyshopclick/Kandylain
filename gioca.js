@@ -75,28 +75,23 @@ function showScoreAnimation(candy) {
     let scoreAnimation = document.createElement('div');
     scoreAnimation.classList.add('score-animation');
     scoreAnimation.textContent = '+5';
-    document.body.appendChild(scoreAnimation);
+    candyBox.appendChild(scoreAnimation);
 
-    scoreAnimation.style.position = 'absolute';
-    scoreAnimation.style.left = (candy.offsetLeft + candy.offsetWidth / 2 - 15) + 'px'; // Posiziona sopra la caramella
-    scoreAnimation.style.top = (candy.offsetTop - 20) + 'px';
-    scoreAnimation.style.fontSize = '24px';
-    scoreAnimation.style.color = '#FF69B4';
-    scoreAnimation.style.animation = 'fadeOut 1s forwards';
+    let xPosition = candy.offsetLeft + candy.offsetWidth / 2 - scoreAnimation.offsetWidth / 2;
+    let yPosition = candy.offsetTop - 30;
 
-    setTimeout(function () {
-        scoreAnimation.remove();
-    }, 1000);
+    scoreAnimation.style.left = xPosition + 'px';
+    scoreAnimation.style.top = yPosition + 'px';
 }
 
 // Funzione per mostrare il punteggio finale
 function showFinalScore() {
     finalScoreDisplay.textContent = 'Punteggio finale: ' + score;
     scoreBoard.style.display = 'block';
-    canClickCandy = false; // Disabilita la possibilità di cliccare le caramelle
+    canClickCandy = false; // Non è più possibile cliccare le caramelle
 }
 
-// Funzione per riavviare il gioco
+// Funzione per rigiocare
 function restartGame() {
     score = 0;
     timer = 15;
@@ -105,19 +100,15 @@ function restartGame() {
     scoreBoard.style.display = 'none';
     spawnCandy();
     interval = setInterval(updateTimer, 1000);
-    canClickCandy = true;
+    startGameBtn.style.display = 'none'; // Nascondi il tasto "Inizia Gioco"
+    canClickCandy = true; // Permette di cliccare le caramelle
 }
 
-// Funzione per iniziare un nuovo gioco
-function startNewGame() {
-    score = 0;
-    timer = 15;
-    scoreDisplay.textContent = 'Punteggio: ' + score;
-    timerDisplay.textContent = timer;
+// Funzione per chiudere la schermata finale
+closeBtn.addEventListener('click', function () {
     scoreBoard.style.display = 'none';
-    startGameBtn.style.display = 'block'; // Mostra il tasto per iniziare un nuovo gioco
-    clearInterval(interval);
-}
+    startGameBtn.style.display = 'block'; // Mostra il tasto "Inizia Gioco"
+});
 
 // Event listener per il tasto "Inizia Gioco"
 startGameBtn.addEventListener('click', startGame);
@@ -126,11 +117,4 @@ startGameBtn.addEventListener('click', startGame);
 replayBtn.addEventListener('click', restartGame);
 
 // Event listener per il tasto "Nuovo Gioco"
-startNewGameBtn.addEventListener('click', startNewGame);
-
-// Event listener per il tasto "X" per chiudere il punteggio finale
-closeBtn.addEventListener('click', function () {
-    scoreBoard.style.display = 'none';
-    startGameBtn.style.display = 'block'; // Mostra il tasto per iniziare un nuovo gioco
-});
-
+startNewGameBtn.addEventListener('click', restartGame);
