@@ -8,6 +8,7 @@ let finalScoreDisplay = document.getElementById('final-score');
 let scoreBoard = document.getElementById('score-board');
 let candyGenerated = false;
 let closeBtn = document.getElementById('close-btn');
+let gameContainer = document.querySelector('.game-container');
 
 function startGame() {
     interval = setInterval(updateTimer, 1000);
@@ -59,9 +60,13 @@ function showScoreAnimation(candy) {
     scoreAnimation.textContent = '+5';
     document.body.appendChild(scoreAnimation);
 
+    let candyRect = candy.getBoundingClientRect();
+    let candyCenterX = candyRect.left + candyRect.width / 2;
+    let candyCenterY = candyRect.top + candyRect.height / 2;
+
     scoreAnimation.style.position = 'absolute';
-    scoreAnimation.style.left = (candy.offsetLeft + candy.offsetWidth / 2 - 15) + 'px'; // Posiziona sopra la caramella
-    scoreAnimation.style.top = (candy.offsetTop - 20) + 'px';
+    scoreAnimation.style.left = candyCenterX - 15 + 'px'; // Posiziona sopra la caramella
+    scoreAnimation.style.top = candyCenterY - 20 + 'px';
     scoreAnimation.style.fontSize = '24px';
     scoreAnimation.style.color = '#FF69B4';
     scoreAnimation.style.animation = 'fadeOut 1s forwards';
@@ -74,10 +79,12 @@ function showScoreAnimation(candy) {
 function showFinalScore() {
     finalScoreDisplay.textContent = 'Punteggio finale: ' + score;
     scoreBoard.style.display = 'block';
+    gameContainer.style.pointerEvents = 'none'; // Impedisce ulteriori clic sui contenuti dietro
 }
 
 closeBtn.addEventListener('click', function() {
     scoreBoard.style.display = 'none';
+    gameContainer.style.pointerEvents = 'auto'; // Riabilita il clic quando chiudi il punteggio finale
 });
 
 startGame();
