@@ -9,25 +9,79 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    overflow: hidden;
 }
 
-/* Stile per il titolo */
+/* Stile per il titolo con animazione */
 header h1 {
     font-size: 3em;
     color: #ff66b2;
     margin-top: 20px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
 }
 
-/* Contenitore della lista scorrevole */
+/* Animazione di dissolvenza per il titolo */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Contenitore della lista scorrevole con animazione */
 .scrollable-list {
     background-color: #fff;
     border: 2px solid #ff66b2;
     border-radius: 10px;
     padding: 20px;
-    width: 300px;
-    max-height: 200px;
-    overflow-y: scroll;
+    width: 90%;
+    max-width: 400px;
+    max-height: 400px;
+    overflow-y: auto;
     margin-top: 20px;
+    opacity: 0;
+    animation: slideIn 2s ease forwards;
+    animation-delay: 1s;
+}
+
+/* Animazione di scorrimento per la lista */
+@keyframes slideIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Stile per ogni elemento della lista */
+.scrollable-list ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.scrollable-list li {
+    font-size: 0.9em;
+    color: #333;
+    padding: 2px 0;
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+/* Animazione per far apparire gli elementi della lista uno alla volta */
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Stile per il footer */
@@ -37,4 +91,19 @@ footer {
     right: 10px;
     color: #ff66b2;
     font-size: 0.8em;
+}
+
+/* Stili per dispositivi mobili */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    .scrollable-list {
+        max-height: 300px;
+    }
+
+    footer {
+        font-size: 0.7em;
+    }
 }
