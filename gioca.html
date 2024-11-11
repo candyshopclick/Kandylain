@@ -4,18 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gioca</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gioca.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Gioco Candy</h1>
-        <p id="timer">Tempo: 15</p>
+        <h1 id="game-title">Gioco Candy</h1>
+        <p id="timer">Tempo: <span id="time-left">15</span></p>
         <p id="score">Punteggio: 0</p>
-        <div class="candy-box" id="candy-box">
-            <span class="candy" onclick="addScore()">🍬</span>
-            <span class="candy" onclick="addScore()">🍬</span>
-            <span class="candy" onclick="addScore()">🍬</span>
-            <span class="candy" onclick="addScore()">🍬</span>
+
+        <div id="candy-box" class="candy-box">
+            <!-- I pallini appariranno qui -->
         </div>
         <a href="index.html" class="back-button">Torna indietro</a>
     </div>
@@ -24,43 +22,6 @@
         <p id="final-score">Punteggio finale: 0</p>
     </div>
 
-    <script>
-        let timer = 15;
-        let score = 0;
-        let interval;
-
-        // Funzione per iniziare il timer
-        function startTimer() {
-            interval = setInterval(function() {
-                timer--;
-                document.getElementById("timer").innerText = "Tempo: " + timer;
-                if (timer <= 0) {
-                    clearInterval(interval);
-                    showFinalScore();
-                }
-            }, 1000);
-        }
-
-        // Funzione per aggiungere punti
-        function addScore() {
-            if (timer > 0) {
-                score += 5;
-                document.getElementById("score").innerText = "Punteggio: " + score;
-            }
-        }
-
-        // Funzione per mostrare il punteggio finale con animazione
-        function showFinalScore() {
-            let finalScoreElement = document.getElementById("final-score");
-            finalScoreElement.innerText = "Punteggio finale: " + score;
-            document.getElementById("score-board").style.display = "block";
-            document.getElementById("score-board").classList.add("animate-score");
-        }
-
-        // Iniziare il gioco
-        window.onload = function() {
-            startTimer();
-        }
-    </script>
+    <script src="gioca.js"></script>
 </body>
 </html>
