@@ -17,9 +17,18 @@ function generateCandy() {
     candy.style.cursor = "pointer";
 
     candy.addEventListener("click", () => {
-        score++;
+        score += 5;
         scoreDisplay.textContent = score; // Aggiorna il punteggio
-        candy.remove();
+
+        // Aggiungi animazione "popup" per il punteggio
+        const scorePopup = document.createElement("div");
+        scorePopup.classList.add("score-popup");
+        scorePopup.textContent = "+5";
+        scorePopup.style.left = candy.offsetLeft + "px";
+        scorePopup.style.top = candy.offsetTop - 30 + "px"; // Posiziona sopra la caramella
+        gameArea.appendChild(scorePopup);
+
+        candy.remove(); // Rimuove la caramella
         generateCandy(); // Ricomincia il gioco con una nuova caramella
     });
 
