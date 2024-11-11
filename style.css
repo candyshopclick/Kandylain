@@ -1,4 +1,4 @@
-{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -13,6 +13,7 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    padding: 10px;
 }
 
 main {
@@ -22,7 +23,7 @@ main {
 }
 
 header h1 {
-    font-size: 3rem;
+    font-size: 8vw; /* Usa vw per dimensione adattiva */
     color: #ff66b2;
     margin-bottom: 20px;
     animation: fadeInTitle 1s ease-in-out forwards;
@@ -48,6 +49,7 @@ header h1 {
     max-height: 300px;
     overflow-y: auto;
     margin-bottom: 20px;
+    width: 100%; /* Adattivo alla larghezza del contenitore */
 }
 
 .scrollable-list p {
@@ -86,6 +88,7 @@ header h1 {
 
 .suggestion-form h2 {
     color: #ff66b2;
+    font-size: 1.5rem;
 }
 
 .suggestion-form input, .suggestion-form button {
@@ -97,7 +100,7 @@ header h1 {
 }
 
 .suggestion-form input {
-    width: 70%;
+    width: 65%;
     margin-right: 5px;
 }
 
@@ -105,6 +108,7 @@ header h1 {
     background-color: #ff66b2;
     color: #fff;
     cursor: pointer;
+    width: 30%;
 }
 
 .suggestion-form button:hover {
@@ -117,4 +121,43 @@ footer {
     right: 10px;
     font-size: 0.8rem;
     color: #666;
+}
+
+/* Media Queries per adattabilità */
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 10vw; /* Riduci la dimensione del titolo per schermi più piccoli */
+    }
+
+    .scrollable-list {
+        max-height: 250px; /* Riduci l'altezza massima per adattarsi meglio agli schermi piccoli */
+    }
+
+    .suggestion-form h2 {
+        font-size: 1.3rem; /* Font più piccolo per schermi più stretti */
+    }
+
+    .suggestion-form input {
+        width: 60%;
+    }
+
+    .suggestion-form button {
+        width: 35%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 12vw; /* Ancora più piccolo su schermi molto stretti */
+    }
+
+    .scrollable-list {
+        max-height: 200px; /* Adatta ancora l'altezza per schermi piccoli */
+    }
+
+    .suggestion-form input, .suggestion-form button {
+        width: 100%; /* Disposizione verticale dei campi */
+        margin: 5px 0;
+    }
 }
