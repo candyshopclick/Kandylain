@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="gioca.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1 id="game-title">Gioco Candy</h1>
-        <button id="start-game-btn" class="start-button">Inizia Gioco</button>
+    <div class="title">
+        <h1>Gioco Candy</h1>
+    </div>
+
+    <button id="start-game-btn" class="play-button">Inizia Gioco</button>
+
+    <div class="scroll-box">
         <p id="timer">Tempo: <span id="time-left">15</span></p>
         <p id="score">Punteggio: 0</p>
-
         <div id="candy-box" class="candy-box">
             <!-- Le caramelle appariranno qui -->
         </div>
@@ -21,8 +24,8 @@
     <div id="score-board" class="score-board">
         <span id="close-btn" class="close-btn">&times;</span>
         <p id="final-score">Punteggio finale: 0</p>
-        <button id="replay-btn" class="replay-btn">Rigioca</button>
-        <button id="start-new-game" class="start-button">Inizia Nuovo Gioco</button>
+        <button id="replay-btn" class="play-button">Rigioca</button>
+        <button id="start-new-game" class="play-button">Inizia Nuovo Gioco</button>
     </div>
 
     <script src="gioca.js"></script>
