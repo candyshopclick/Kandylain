@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gioca</title>
+    <title>Gioco delle Caramelle</title>
     <link rel="stylesheet" href="gioca.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1 id="game-title">Gioco Candy</h1>
-        <p id="timer">Tempo: <span id="time-left">15</span></p>
-        <p id="score">Punteggio: 0</p>
 
-        <div id="candy-box" class="candy-box">
-            <!-- Le caramelle appariranno qui -->
+    <div class="game-container">
+        <div class="candy-box">
+            <span id="candy"></span>
         </div>
-        <a href="index.html" class="back-button">Torna indietro</a>
+        <div class="score">
+            Punti: <span id="score">0</span>
+        </div>
     </div>
 
-    <div id="score-board" class="score-board">
-        <span id="close-btn" class="close-btn">&times;</span>
-        <p id="final-score">Punteggio finale: 0</p>
+    <!-- Pannello Punteggio Finale -->
+    <div class="score-board" id="score-board">
+        <div id="final-score">Punteggio finale: <span id="final-score-value">0</span></div>
+        <span id="close-btn">×</span>
     </div>
 
     <script src="gioca.js"></script>
