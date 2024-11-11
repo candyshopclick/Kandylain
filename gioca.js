@@ -8,10 +8,18 @@ let finalScoreDisplay = document.getElementById('final-score');
 let scoreBoard = document.getElementById('score-board');
 let candyGenerated = false;
 let closeBtn = document.getElementById('close-btn');
+let startGameBtn = document.getElementById('start-game-btn');
+let replayBtn = document.getElementById('replay-btn');
 
 function startGame() {
-    interval = setInterval(updateTimer, 1000);
+    score = 0;
+    timer = 15;
+    scoreDisplay.textContent = 'Punteggio: ' + score;
+    timerDisplay.textContent = timer;
+    scoreBoard.style.display = 'none';
     spawnCandy();
+    interval = setInterval(updateTimer, 1000);
+    startGameBtn.style.display = 'none'; // Nascondi il tasto "Inizia Gioco"
 }
 
 function updateTimer() {
@@ -76,8 +84,22 @@ function showFinalScore() {
     scoreBoard.style.display = 'block';
 }
 
+function restartGame() {
+    score = 0;
+    timer = 15;
+    scoreDisplay.textContent = 'Punteggio: ' + score;
+    timerDisplay.textContent = timer;
+    scoreBoard.style.display = 'none';
+    spawnCandy();
+    interval = setInterval(updateTimer, 1000);
+}
+
 closeBtn.addEventListener('click', function() {
     scoreBoard.style.display = 'none';
 });
 
-startGame();
+replayBtn.addEventListener('click', function() {
+    restartGame();
+});
+
+startGameBtn.addEventListener('click', startGame);
