@@ -1,0 +1,40 @@
+/* Imposta lo stile per tutto il corpo */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #ffe6f2;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Stile per il titolo */
+header h1 {
+    font-size: 3em;
+    color: #ff66b2;
+    margin-top: 20px;
+}
+
+/* Contenitore della lista scorrevole */
+.scrollable-list {
+    background-color: #fff;
+    border: 2px solid #ff66b2;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    max-height: 200px;
+    overflow-y: scroll;
+    margin-top: 20px;
+}
+
+/* Stile per il footer */
+footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: #ff66b2;
+    font-size: 0.8em;
+}
