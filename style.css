@@ -1,109 +1,120 @@
-/* Imposta lo stile per tutto il corpo */
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
-    color: #333;
     background-color: #ffe6f2;
-    margin: 0;
+    color: #333;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
     overflow: hidden;
 }
 
-/* Stile per il titolo con animazione */
-header h1 {
-    font-size: 3em;
-    color: #ff66b2;
-    margin-top: 20px;
+main {
     text-align: center;
-    opacity: 0;
-    animation: fadeIn 2s ease forwards;
-}
-
-/* Animazione di dissolvenza per il titolo */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Contenitore della lista scorrevole con animazione */
-.scrollable-list {
-    background-color: #fff;
-    border: 2px solid #ff66b2;
-    border-radius: 10px;
-    padding: 20px;
     width: 90%;
-    max-width: 400px;
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 20px;
-    opacity: 0;
-    animation: slideIn 2s ease forwards;
-    animation-delay: 1s;
+    max-width: 600px;
 }
 
-/* Animazione di scorrimento per la lista */
-@keyframes slideIn {
+header h1 {
+    font-size: 3rem;
+    color: #ff66b2;
+    margin-bottom: 20px;
+    animation: fadeInTitle 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInTitle {
     from {
-        transform: translateY(50px);
         opacity: 0;
+        transform: translateY(-20px);
     }
     to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Stile per ogni elemento della lista */
+.scrollable-list {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.scrollable-list p {
+    font-weight: bold;
+    color: #ff66b2;
+    margin-bottom: 10px;
+}
+
 .scrollable-list ul {
-    padding: 0;
-    margin: 0;
     list-style-type: none;
 }
 
-.scrollable-list li {
-    font-size: 0.9em;
+.scrollable-list ul li {
+    font-size: 1.1rem;
     color: #333;
-    padding: 2px 0;
+    padding: 5px 0;
     opacity: 0;
-    animation: fadeInUp 0.5s ease forwards;
-    animation-delay: calc(0.1s * var(--i));
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--i) * 0.07s);
 }
 
-/* Animazione per far apparire gli elementi della lista uno alla volta */
-@keyframes fadeInUp {
+@keyframes fadeIn {
     from {
-        transform: translateY(20px);
         opacity: 0;
+        transform: translateY(10px);
     }
     to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Stile per il footer */
+.suggestion-form {
+    margin-top: 20px;
+}
+
+.suggestion-form h2 {
+    color: #ff66b2;
+}
+
+.suggestion-form input, .suggestion-form button {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ff66b2;
+    margin-top: 10px;
+}
+
+.suggestion-form input {
+    width: 70%;
+    margin-right: 5px;
+}
+
+.suggestion-form button {
+    background-color: #ff66b2;
+    color: #fff;
+    cursor: pointer;
+}
+
+.suggestion-form button:hover {
+    background-color: #ff4da6;
+}
+
 footer {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    color: #ff66b2;
-    font-size: 0.8em;
-}
-
-/* Stili per dispositivi mobili */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2em;
-    }
-
-    .scrollable-list {
-        max-height: 300px;
-    }
-
-    footer {
-        font-size: 0.7em;
-    }
+    font-size: 0.8rem;
+    color: #666;
 }
