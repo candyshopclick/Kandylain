@@ -1,90 +1,76 @@
-let score = 0;
-let timer = 15;
-let interval;
-let candyBox = document.getElementById('candy-box');
+let score = 0;  // Punteggio iniziale
+let candy = document.getElementById('candy');
 let scoreDisplay = document.getElementById('score');
-let timerDisplay = document.getElementById('time-left');
-let finalScoreDisplay = document.getElementById('final-score');
+let finalScore = document.getElementById('final-score-value');
 let scoreBoard = document.getElementById('score-board');
-let candyGenerated = false;
 let closeBtn = document.getElementById('close-btn');
-let gameContainer = document.querySelector('.game-container');
 
-function startGame() {
-    interval = setInterval(updateTimer, 1000);
-    spawnCandy();
+// Funzione per generare una caramella in una posizione casuale
+function generateCandy() {
+    let box = document.querySelector('.candy-box');
+    let randomX = Math.random() * (box.offsetWidth - candy.offsetWidth);
+    let randomY = Math.random() * (box.offsetHeight - candy.offsetHeight);
+
+    candy.style.left = randomX + 'px';
+    candy.style.top = randomY + 'px';
+    candy.style.display = 'block';
 }
 
-function updateTimer() {
-    timer--;
-    timerDisplay.textContent = timer;
-    if (timer === 0) {
-        clearInterval(interval);
-        showFinalScore();
-    }
-}
-
-function spawnCandy() {
-    if (!candyGenerated) {
-        let candy = document.createElement('span');
-        candy.classList.add('candy');
-        candy.textContent = '🍬';
-        candyBox.appendChild(candy);
-
-        let randomPositionX = Math.floor(Math.random() * (candyBox.offsetWidth - 50));
-        let randomPositionY = Math.floor(Math.random() * (candyBox.offsetHeight - 50));
-
-        candy.style.left = randomPositionX + 'px';
-        candy.style.top = randomPositionY + 'px';
-
-        candy.addEventListener('click', function () {
-            addScore();
-            showScoreAnimation(candy);  // Mostra +5 sopra la caramella
-            candy.remove();
-            candyGenerated = false; // Permette di generare una nuova caramella
-            spawnCandy();
-        });
-
-        candyGenerated = true; // Impedisce che vengano generate più caramelle
-    }
-}
-
-function addScore() {
+// Funzione per aumentare il punteggio e nascondere la caramella
+candy.addEventListener('click', () => {
     score += 5;
-    scoreDisplay.textContent = 'Punteggio: ' + score;
-}
+    scoreDisplay.textContent = score;
+    candy.style.display = 'none';  // Nasconde la caramella
 
-function showScoreAnimation(candy) {
-    let scoreAnimation = document.createElement('div');
-    scoreAnimation.classList.add('score-animation');
-    scoreAnimation.textContent = '+5';
-    document.body.appendChild(scoreAnimation);
+    // Animazione +5
+    let plusFive = document.createElement('div');
+    plusFive.textContent = '+5';
+    plusFive.style.position = 'absolute';
+    plusFive.style.color = '#FF1493';
+    plusFive.style.fontSize = '30px';
+    plusFive.style.top = candy.offsetTop + 'px';
+    plusFive.style.left = candy.offsetLeft + 'px';
+    document.body.appendChild(plusFive);
 
-    let candyRect = candy.getBoundingClientRect();
-    let candyCenterX = candyRect.left + candyRect.width / 2;
-    let candyCenterY = candyRect.top + candyRect.height / 2;
+    // Animazione per il +5
+    let animation = plusFive.animate([
+        { transform: 'translateY(0px)', opacity: 1 },
+        { transform: 'translateY(-30px)', opacity: 0 }
+    ], {
+        duration: 1000,
+        easing: 'ease-out',
+        fill: 'forwards'
+    });
 
-    scoreAnimation.style.position = 'absolute';
-    scoreAnimation.style.left = candyCenterX - 15 + 'px'; // Posiziona sopra la caramella
-    scoreAnimation.style.top = candyCenterY - 20 + 'px';
-    scoreAnimation.style.fontSize = '24px';
-    scoreAnimation.style.color = '#FF69B4';
-    scoreAnimation.style.animation = 'fadeOut 1s forwards';
+    animation.onfinish = () => {
+        document.body.removeChild(plusFive);
+    };
 
-    setTimeout(function () {
-        scoreAnimation.remove();
-    }, 1000);
-}
-
-function showFinalScore() {
-    finalScoreDisplay.textContent = 'Punteggio finale: ' + score;
-    scoreBoard.style.display = 'block';
-    gameContainer.style.pointerEvents = 'none'; // Impedisce ulteriori clic sui contenuti dietro
-}
-
-closeBtn.addEventListener('click', function() {
-    scoreBoard.style.display = 'none';
-    gameContainer.style.pointerEvents = 'auto'; // Riabilita il clic quando chiudi il punteggio finale
+    // Genera una nuova caramella
+    generateCandy();
 });
 
-startGame();
+// Timer del gioco
+let timer = 15;
+let timerInterval = setInterval(() => {
+    if (timer <= 0) {
+        clearInterval(timerInterval);
+        showFinalScore();
+    } else {
+        timer--;
+    }
+}, 1000);
+
+// Mostra il punteggio finale
+function showFinalScore() {
+    finalScore.textContent = score;
+    scoreBoard.style.display = 'block';
+}
+
+// Chiudi il pannello del punteggio finale
+closeBtn.addEventListener('click', () => {
+    scoreBoard.style.display = 'none';
+});
+
+// Avvia il gioco con la prima caramella
+generateCandy();
