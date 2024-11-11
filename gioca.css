@@ -1,79 +1,44 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Stile Generale */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF0F5; /* Colore di sfondo rosa chiaro */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 20px;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .game-container {
-    background-color: #FF69B4; /* Rosa caramella */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 600px;
-}
-
-h1 {
-    font-size: 32px;
-    color: white;
-    margin-bottom: 10px;
-}
-
-#timer, #score {
-    font-size: 20px;
-    color: white;
-    margin: 10px 0;
+    text-align: center;
 }
 
 .candy-box {
-    position: relative;
-    width: 100%;
+    width: 300px;
     height: 300px;
-    background-color: #fff;
-    border: 2px solid #FF69B4; /* Rosa caramella */
+    position: relative;
+    margin: 0 auto;
+    background-color: #FFF;
+    border: 3px solid #FF69B4;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.candy {
+#candy {
+    width: 50px;
+    height: 50px;
+    background-color: #FF1493;
     position: absolute;
-    font-size: 40px;
-    cursor: pointer;
-    user-select: none;
-    animation: popUp 0.5s ease-out forwards;
+    border-radius: 50%;
+    display: none; /* Inizialmente non visibile */
 }
 
-@keyframes popUp {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.back-button {
-    display: inline-block;
+.score {
+    font-size: 24px;
+    color: #333;
     margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ff3366; /* Rosa caramella */
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
 }
 
 .score-board {
@@ -82,24 +47,32 @@ h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
-    padding: 20px;
+    padding: 30px 40px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     display: none;
     z-index: 999;
     text-align: center;
+    width: 350px; /* Riquadro più grande */
+    height: 250px;
 }
 
 #final-score {
-    font-size: 24px;
+    font-size: 30px;
     color: #333;
+    margin-bottom: 20px;
+}
+
+#final-score-value {
+    font-size: 36px;
+    color: #FF1493;
 }
 
 #close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 30px;
+    font-size: 40px;
     color: #FF69B4;
     cursor: pointer;
 }
@@ -107,4 +80,3 @@ h1 {
 #close-btn:hover {
     color: #333;
 }
-
