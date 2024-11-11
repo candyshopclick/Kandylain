@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f1f1f1;
+    background-color: #F8BBD0; /* Rosa chiaro per lo sfondo */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,7 +17,7 @@ body {
 }
 
 .game-container {
-    background-color: #FF69B4; /* Rosa caramella */
+    background-color: #FF80AB; /* Rosa caramella */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -29,6 +29,7 @@ h1 {
     font-size: 32px;
     color: white;
     margin-bottom: 10px;
+    font-family: 'Comic Sans MS', cursive;
 }
 
 #timer, #score {
@@ -69,7 +70,7 @@ h1 {
 .start-button, .replay-btn, #start-new-game {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #ff3366; /* Rosa caramella */
+    background-color: #FF4081; /* Rosa caramella */
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -78,7 +79,7 @@ h1 {
 }
 
 .start-button:hover, .replay-btn:hover, #start-new-game:hover {
-    background-color: #ff4d7f;
+    background-color: #F50057;
 }
 
 .score-board {
@@ -99,6 +100,7 @@ h1 {
 #final-score {
     font-size: 24px;
     color: #333;
+    font-family: 'Comic Sans MS', cursive;
 }
 
 #close-btn {
@@ -112,5 +114,22 @@ h1 {
 
 #close-btn:hover {
     color: #333;
+}
+
+.score-animation {
+    position: absolute;
+    font-size: 24px;
+    color: #FF69B4;
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
 }
 
