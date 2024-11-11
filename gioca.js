@@ -10,6 +10,8 @@ let candyGenerated = false;
 let closeBtn = document.getElementById('close-btn');
 let startGameBtn = document.getElementById('start-game-btn');
 let replayBtn = document.getElementById('replay-btn');
+let startNewGameBtn = document.getElementById('start-new-game');
+let canClickCandy = false;
 
 function startGame() {
     score = 0;
@@ -20,6 +22,7 @@ function startGame() {
     spawnCandy();
     interval = setInterval(updateTimer, 1000);
     startGameBtn.style.display = 'none'; // Nascondi il tasto "Inizia Gioco"
+    canClickCandy = true;
 }
 
 function updateTimer() {
@@ -32,7 +35,7 @@ function updateTimer() {
 }
 
 function spawnCandy() {
-    if (!candyGenerated) {
+    if (canClickCandy && !candyGenerated) {
         let candy = document.createElement('span');
         candy.classList.add('candy');
         candy.textContent = '🍬';
@@ -45,11 +48,13 @@ function spawnCandy() {
         candy.style.top = randomPositionY + 'px';
 
         candy.addEventListener('click', function () {
-            addScore();
-            showScoreAnimation(candy);  // Mostra +5 sopra la caramella
-            candy.remove();
-            candyGenerated = false; // Permette di generare una nuova caramella
-            spawnCandy();
+            if (canClickCandy) {
+                addScore();
+                showScoreAnimation(candy);  // Mostra +5 sopra la caramella
+                candy.remove();
+                candyGenerated = false; // Permette di generare una nuova caramella
+                spawnCandy();
+            }
         });
 
         candyGenerated = true; // Impedisce che vengano generate più caramelle
@@ -82,6 +87,7 @@ function showScoreAnimation(candy) {
 function showFinalScore() {
     finalScoreDisplay.textContent = 'Punteggio finale: ' + score;
     scoreBoard.style.display = 'block';
+    canClickCandy = false; // Disabilita la possibilità di cliccare le caramelle
 }
 
 function restartGame() {
@@ -92,14 +98,27 @@ function restartGame() {
     scoreBoard.style.display = 'none';
     spawnCandy();
     interval = setInterval(updateTimer, 1000);
+    canClickCandy = true;
 }
 
-closeBtn.addEventListener('click', function() {
+function startNewGame() {
+    score = 0;
+    timer = 15;
+    scoreDisplay.textContent = 'Punteggio: ' + score;
+    timerDisplay.textContent = timer;
     scoreBoard.style.display = 'none';
-});
-
-replayBtn.addEventListener('click', function() {
-    restartGame();
-});
+    spawnCandy();
+    interval = setInterval(updateTimer, 1000);
+    startGameBtn.style.display = 'none';
+    canClickCandy = true;
+}
 
 startGameBtn.addEventListener('click', startGame);
+replayBtn.addEventListener('click', restartGame);
+startNewGameBtn.addEventListener('click', startNewGame);
+
+closeBtn.addEventListener('click', function () {
+    scoreBoard.style.display = 'none';
+    startGameBtn.style.display = 'block'; // Rende visibile il tasto per iniziare un nuovo gioco
+});
+
