@@ -1,6 +1,8 @@
 let score = 0;
 const gameArea = document.getElementById("game-area");
+const scoreDisplay = document.getElementById("score");
 const resetBtn = document.getElementById("reset-btn");
+const backBtn = document.getElementById("back-btn");
 
 function generateCandy() {
     const candy = document.createElement("div");
@@ -16,8 +18,9 @@ function generateCandy() {
 
     candy.addEventListener("click", () => {
         score++;
+        scoreDisplay.textContent = score; // Aggiorna il punteggio
         candy.remove();
-        generateCandy();
+        generateCandy(); // Ricomincia il gioco con una nuova caramella
     });
 
     gameArea.appendChild(candy);
@@ -25,8 +28,14 @@ function generateCandy() {
 
 resetBtn.addEventListener("click", () => {
     score = 0;
+    scoreDisplay.textContent = score; // Reset del punteggio visualizzato
     gameArea.innerHTML = ""; // Rimuove tutte le caramelle
     generateCandy(); // Ricomincia il gioco
+});
+
+// Funzione per tornare indietro alla pagina principale
+backBtn.addEventListener("click", () => {
+    window.location.href = "index.html"; // Torna alla pagina iniziale
 });
 
 // Inizia il gioco
