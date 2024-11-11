@@ -1,51 +1,74 @@
 let score = 0;
-const gameArea = document.getElementById("game-area");
-const scoreDisplay = document.getElementById("score");
-const resetBtn = document.getElementById("reset-btn");
-const backBtn = document.getElementById("back-btn");
+let timer = 15;
+let interval;
+let candyBox = document.getElementById('candy-box');
+let scoreDisplay = document.getElementById('score');
+let timerDisplay = document.getElementById('time-left');
+let finalScoreDisplay = document.getElementById('final-score');
+let scoreBoard = document.getElementById('score-board');
 
-function generateCandy() {
-    const candy = document.createElement("div");
-    candy.classList.add("candy");
-    candy.style.left = Math.random() * (gameArea.offsetWidth - 50) + "px";
-    candy.style.top = Math.random() * (gameArea.offsetHeight - 50) + "px";
-    candy.style.position = "absolute";
-    candy.style.width = "50px";
-    candy.style.height = "50px";
-    candy.style.backgroundColor = "#ff66b2";
-    candy.style.borderRadius = "50%";
-    candy.style.cursor = "pointer";
-
-    candy.addEventListener("click", () => {
-        score += 5;
-        scoreDisplay.textContent = score; // Aggiorna il punteggio
-
-        // Aggiungi animazione "popup" per il punteggio
-        const scorePopup = document.createElement("div");
-        scorePopup.classList.add("score-popup");
-        scorePopup.textContent = "+5";
-        scorePopup.style.left = candy.offsetLeft + "px";
-        scorePopup.style.top = candy.offsetTop - 30 + "px"; // Posiziona sopra la caramella
-        gameArea.appendChild(scorePopup);
-
-        candy.remove(); // Rimuove la caramella
-        generateCandy(); // Ricomincia il gioco con una nuova caramella
-    });
-
-    gameArea.appendChild(candy);
+function startGame() {
+    interval = setInterval(updateTimer, 1000);
+    spawnCandy();
 }
 
-resetBtn.addEventListener("click", () => {
-    score = 0;
-    scoreDisplay.textContent = score; // Reset del punteggio visualizzato
-    gameArea.innerHTML = ""; // Rimuove tutte le caramelle
-    generateCandy(); // Ricomincia il gioco
-});
+function updateTimer() {
+    timer--;
+    timerDisplay.textContent = timer;
+    if (timer === 0) {
+        clearInterval(interval);
+        showFinalScore();
+    }
+}
 
-// Funzione per tornare indietro alla pagina principale
-backBtn.addEventListener("click", () => {
-    window.location.href = "index.html"; // Torna alla pagina iniziale
-});
+function spawnCandy() {
+    let candy = document.createElement('span');
+    candy.classList.add('candy');
+    candy.textContent = '🍬';
+    candyBox.appendChild(candy);
 
-// Inizia il gioco
-generateCandy();
+    let randomPositionX = Math.floor(Math.random() * (candyBox.offsetWidth - 50));
+    let randomPositionY = Math.floor(Math.random() * (candyBox.offsetHeight - 50));
+
+    candy.style.left = randomPositionX + 'px';
+    candy.style.top = randomPositionY + 'px';
+
+    candy.addEventListener('click', function () {
+        addScore();
+        showScoreAnimation();
+        candy.remove();
+    });
+
+    setTimeout(spawnCandy, 1000); // Spawna un altro candy dopo 1 secondo
+}
+
+function addScore() {
+    score += 5;
+    scoreDisplay.textContent = 'Punteggio: ' + score;
+}
+
+function showScoreAnimation() {
+    let scoreAnimation = document.createElement('div');
+    scoreAnimation.classList.add('score-animation');
+    scoreAnimation.textContent = '+5';
+    document.body.appendChild(scoreAnimation);
+
+    scoreAnimation.style.position = 'absolute';
+    scoreAnimation.style.top = '20px';
+    scoreAnimation.style.left = '50%';
+    scoreAnimation.style.transform = 'translateX(-50%)';
+    scoreAnimation.style.fontSize = '24px';
+    scoreAnimation.style.color = '#FF69B4';
+    scoreAnimation.style.animation = 'fadeOut 1s forwards';
+
+    setTimeout(function () {
+        scoreAnimation.remove();
+    }, 1000);
+}
+
+function showFinalScore() {
+    finalScoreDisplay.textContent = 'Punteggio finale: ' + score;
+    scoreBoard.style.display = 'block';
+}
+
+startGame();
